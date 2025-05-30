@@ -1,23 +1,26 @@
-# Proyecto Bimestral – Teoría de Autómatas y Compiladores
+# Analizador Léxico
 
-Este repositorio contiene el proyecto bimestral para la asignatura **Teoría de Autómatas y Compiladores**. El proyecto consiste en la implementación de un autómata finito determinista (AFD) que reconoce construcciones básicas de un lenguaje de programación, como declaraciones de variables, asignaciones, estructuras de control (`if`, `while`), impresión de datos y comentarios.
+Este proyecto implementa un analizador léxico para un lenguaje de programación simple, capaz de identificar y clasificar tokens en el código fuente.
 
----
+## Características
 
-## 📌 Características del AFD
+- Reconocimiento de tokens básicos de programación
+- Manejo de comentarios
+- Detección de errores léxicos
+- Soporte para tipos de datos básicos (int, string, bool)
+- Validación de sintaxis
 
-Este autómata está diseñado para aceptar expresiones básicas del lenguaje, tales como:
+## Estructura del Proyecto
 
-* Declaración de variables: `var x: int;`
-* Asignación de valores: `x = 5;`, `mensaje = "Hola";`
-* Sentencias condicionales: `if(x==5)`
-* Bucles: `while(x>0)`
-* Impresión: `print(x)`
-* Comentarios: `# esto es un comentario`
+- `analizador_lexico.py`: Implementación principal del analizador léxico
+- `validador_todo_correcto.py`: Validador para código sintácticamente correcto
+- `validador_no_correcto.py`: Validador para casos de prueba con código incorrecto
+- `base.txt`: Archivo de ejemplo con código para analizar
+- `FINAL/`: Carpeta con la versión final del proyecto
+  - `validador.py`: Validador mejorado que analiza línea por línea
+  - `codigo_mixto.txt`: Archivo de prueba con ejemplos de código correcto e incorrecto
 
----
-
-## 📄 Tabla de transición
+## Tabla de Transición
 
 | Estado Origen | Entrada                     | Estado Destino | Descripción                       |
 | ------------- | --------------------------- | -------------- | --------------------------------- |
@@ -55,25 +58,97 @@ Este autómata está diseñado para aceptar expresiones básicas del lenguaje, t
 | q9            | `newline`                   | q5             | Fin de comentario                 |
 | q8            | `+ - * /`                   | q8             | Operadores aritméticos            |
 
----
+## Tokens Soportados
 
-## 🖼 Imagen del AFD (JFLAP)
+El analizador reconoce los siguientes tipos de tokens:
 
-![image](https://github.com/user-attachments/assets/360089c6-9519-49f3-b3ce-8338523ded68)
+- Palabras clave: `var`, `int`, `string`, `bool`, `if`, `while`, `print`, `true`, `false`
+- Identificadores: Nombres de variables
+- Números: Valores enteros
+- Strings: Texto entre comillas dobles
+- Operadores: `+`, `-`, `*`, `/`
+- Comparadores: `==`, `!=`, `<=`, `>=`, `<`, `>`
+- Símbolos especiales: `=`, `;`, `:`, `(`, `)`, `{`, `}`
+- Comentarios: Líneas que comienzan con `#`
 
+## Uso
 
----
+1. Para analizar código correcto:
+```bash
+python validador_todo_correcto.py
+```
 
-## 🛠 Tecnologías utilizadas
+2. Para probar casos de código incorrecto:
+```bash
+python validador_no_correcto.py
+```
 
-* JFLAP (para el diseño del autómata)
-* XML (estructura del autómata)
-* Git & GitHub (control de versiones)
+3. Para usar el validador final (versión mejorada):
+```bash
+cd FINAL
+python validador.py
+```
 
----
+## Ejemplo de Código Válido
 
-## ✅ Estado del proyecto
+```python
+# Declaración de variables
+var x: int;
+var texto: string;
+var activo: bool;
 
-✔ Proyecto completado y probado correctamente en JFLAP.
+# Asignaciones
+x = 42;
+texto = "Hola mundo";
+activo = true;
+
+# Estructuras de control
+if (x > 10) {
+    print(true);
+}
+```
+
+## Ejemplos de Código Incorrecto
+
+El archivo `FINAL/codigo_mixto.txt` contiene ejemplos de código correcto e incorrecto:
+
+```python
+# Código correcto
+var edad: int;              # ✅ Válido: declaración correcta
+var nombre: string;         # ✅ Válido: declaración correcta
+edad = 25;                  # ✅ Válido: asignación correcta
+
+# Código incorrecto
+var 123edad: int;           # ❌ Inválido: identificador comienza con número
+var nombre@: string;        # ❌ Inválido: carácter no válido
+edad = "25";                # ❌ Inválido: tipo incorrecto
+```
+
+## Manejo de Errores
+
+El analizador detecta y reporta los siguientes tipos de errores:
+- Caracteres no válidos
+- Identificadores mal formados
+- Strings sin cerrar
+- Operadores no válidos
+- Comentarios mal formados
+
+## Requisitos
+
+- Python 3.x
+- No se requieren dependencias externas
+
+## Contribución
+
+Si deseas contribuir al proyecto:
+1. Haz un fork del repositorio
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
+
+## Licencia
+
+Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
 
 ---
