@@ -59,10 +59,9 @@ Este autómata está diseñado para aceptar expresiones básicas del lenguaje, t
 
 ## 🖼 Imagen del AFD (JFLAP)
 
-> Inserta aquí la imagen exportada desde JFLAP como PNG o SVG:
-
 ```
-[![AFD generado con JFLAP](ruta/a/la/imagen.png)](ruta/a/la/imagen.png)
+![image](https://github.com/user-attachments/assets/360089c6-9519-49f3-b3ce-8338523ded68)
+
 ```
 
 ---
