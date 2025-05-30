@@ -55,28 +55,5 @@ def lexer(code):
         pos = match.end()
     return tokens
 
-codigo_correcto = '''
-# njbpc rup
-# ajhik zmtbot
-var ubkmqoyf: bool;
-var thf: string;
-var ohp: int;
-ubkmqoyf = true;
-thf = fdi;
-ohp = 27;
-if (33 <= "trhwx") {
-    print(false);
-    myirccie = 49;
-    # vsd dlwfeb ysyey
-}
-while (26 > 47) {
-    print(true);
-    iirj = false;
-    # ygmlczbc tuept wngnrva ykw
-}
-'''
 
-tokens = lexer(codigo_correcto)
-for t in tokens:
-    print(t)
 

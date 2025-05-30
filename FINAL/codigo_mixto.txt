@@ -1,0 +1,17 @@
+# === CÓDIGO CORRECTO ===
+var edad: int;              # ✅ Válido: declaración correcta
+var nombre: string;         # ✅ Válido: declaración correcta
+edad = 25;                  # ✅ Válido: asignación correcta
+nombre = "Juan";            # ✅ Válido: string correcto
+if (edad > 18) {            # ✅ Válido: condición correcta
+    print(true);            # ✅ Válido: print con booleano
+}
+
+# === CÓDIGO INCORRECTO ===
+var 123edad: int;           # ❌ Inválido: identificador comienza con número
+var nombre@: string;        # ❌ Inválido: carácter no válido
+edad = "25";                # ❌ Inválido: tipo incorrecto
+nombre = Juan;              # ❌ Inválido: string sin comillas
+if (edad >) {               # ❌ Inválido: condición incompleta
+    print(true);
+} 
