@@ -13,8 +13,11 @@ token_specs = [
     ("ID", r"[a-zA-Z_][a-zA-Z_0-9]*"),          # Identificadores
     ("ASSIGN", r"="),                           # Asignación
     ("SEMICOLON", r";"),                        # ;
+    ("COLON", r":"),                            # :
     ("LPAREN", r"\("),                          # (
     ("RPAREN", r"\)"),                          # )
+    ("LBRACE", r"\{"),                          # {
+    ("RBRACE", r"\}"),                          # }
     ("STRING", r'"[^"]*"'),                     # Cadenas
     ("OP", r"[+\-*/]"),                         # Operadores aritméticos
     ("CMP", r"(==|!=|<=|>=|<|>)"),              # Comparadores
@@ -51,3 +54,29 @@ def lexer(code):
 
         pos = match.end()
     return tokens
+
+codigo_correcto = '''
+# njbpc rup
+# ajhik zmtbot
+var ubkmqoyf: bool;
+var thf: string;
+var ohp: int;
+ubkmqoyf = true;
+thf = fdi;
+ohp = 27;
+if (33 <= "trhwx") {
+    print(false);
+    myirccie = 49;
+    # vsd dlwfeb ysyey
+}
+while (26 > 47) {
+    print(true);
+    iirj = false;
+    # ygmlczbc tuept wngnrva ykw
+}
+'''
+
+tokens = lexer(codigo_correcto)
+for t in tokens:
+    print(t)
+
