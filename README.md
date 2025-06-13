@@ -48,6 +48,7 @@ Este proyecto corresponde al trabajo bimestral de la asignatura "Teoría de Aut�
 
 ## Espacio para imagen
 
+![image](https://github.com/user-attachments/assets/be0ba96f-68c4-4690-a8b9-9f44c9582489)
 
 
 ## Tabla de transición (basada en automata_final.jff)
