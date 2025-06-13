@@ -1,141 +1,81 @@
 # Analizador Léxico
 
-Este proyecto implementa un analizador léxico para un lenguaje de programación simple, capaz de identificar y clasificar tokens en el código fuente.
+Este proyecto corresponde al trabajo bimestral de la asignatura "Teoría de Autómatas y Compiladores". Consiste en un analizador léxico implementado en Python, capaz de identificar y clasificar los diferentes tokens presentes en un archivo de código fuente sencillo. El analizador reconoce palabras clave, identificadores, operadores, literales, comentarios y otros símbolos, mostrando el resultado por consola.
 
-## Características
+## Descripción del funcionamiento
 
-- Reconocimiento de tokens básicos de programación
-- Manejo de comentarios
-- Detección de errores léxicos
-- Soporte para tipos de datos básicos (int, string, bool)
-- Validación de sintaxis
+- El archivo principal es `analizador_lexico.py`.
+- Utiliza expresiones regulares para definir los patrones de los tokens.
+- El conjunto de palabras clave reconocidas es:
+  - `main`, `number`, `string`, `Boolean`, `True`, `False`, `for`, `while`, `if`, `else`, `echo`, `input`, `and`, `or`, `not`
+- Los tipos de tokens reconocidos son:
+  - **PALABRA_CLAVE**: Palabras reservadas del lenguaje.
+  - **IDENTIFICADOR**: Nombres de variables o funciones (letra o guion bajo inicial, seguido de letras, dígitos o guion bajo).
+  - **NUM_ENTERO** y **NUM_FLOTANTE**: Números enteros y flotantes.
+  - **LITERAL_CADENA**: Cadenas entre comillas dobles.
+  - **OPERADOR_DUP**: Operadores dobles como `++`, `--`, `==`, `!=`, `<=`, `>=`, `&&`, `||`.
+  - **OPERADOR**: Operadores simples como `=`, `<`, `>`, `+`, `-`, `*`, `/`, `!`.
+  - **LLAVE_ABRE**, **LLAVE_CIERRA**, **PAR_IZQ**, **PAR_DER**, **COMA**, **PUNTO_Y_COMA**: Símbolos de agrupación y puntuación.
+  - **COMENTARIO_LINEA**: Comentarios de una línea que empiezan con `//`.
+  - **ESPACIOS**: Espacios y saltos de línea (ignorados).
+  - **SIMBOLO_DESCONOCIDO**: Cualquier otro carácter no esperado (marca error).
+- El archivo de entrada de ejemplo es `base.txt`, que contiene código de prueba con todos los elementos anteriores.
 
-## Estructura del Proyecto
+## Instrucciones de uso
 
-- `analizador_lexico.py`: Implementación principal del analizador léxico
-- `validador_todo_correcto.py`: Validador para código sintácticamente correcto
-- `validador_no_correcto.py`: Validador para casos de prueba con código incorrecto
-- `base.txt`: Archivo de ejemplo con código para analizar
-- `FINAL/`: Carpeta con la versión final del proyecto
-  - `validador.py`: Validador mejorado que analiza línea por línea
-  - `codigo_mixto.txt`: Archivo de prueba con ejemplos de código correcto e incorrecto
+1. Asegúrate de tener Python instalado.
+2. Coloca el archivo `analizador_lexico.py` y el archivo de código fuente a analizar (por ejemplo, `base.txt`) en el mismo directorio.
+3. Ejecuta el analizador desde la terminal:
 
-## Tabla de Transición
+   ```sh
+   python analizador_lexico.py base.txt
+   ```
 
-| Estado Origen | Entrada                     | Estado Destino | Descripción                       |
-| ------------- | --------------------------- | -------------- | --------------------------------- |
-| q0            | `var`                       | q1             | Inicio de declaración de variable |
-| q1            | `letter`                    | q2             | Nombre de variable                |
-| q2            | `letter`                    | q2             | Letras adicionales                |
-| q2            | `digit`                     | q2             | Dígitos del identificador         |
-| q2            | `:`                         | q3             | Separador de tipo                 |
-| q3            | `int`                       | q4             | Tipo de dato: entero              |
-| q3            | `string`                    | q4             | Tipo de dato: cadena              |
-| q3            | `bool`                      | q4             | Tipo de dato: booleano            |
-| q4            | `;`                         | q5             | Fin de declaración                |
-| q0            | `letter`                    | q6             | Inicio de asignación              |
-| q6            | `letter`                    | q6             | Letras del identificador          |
-| q6            | `digit`                     | q6             | Dígitos del identificador         |
-| q6            | `=`                         | q7             | Asignación                        |
-| q7            | `digit`                     | q8             | Valor numérico                    |
-| q7            | `letter`                    | q8             | Identificador como valor          |
-| q7            | `"`                         | q8             | Inicio de cadena                  |
-| q8            | `letter`                    | q8             | Letras dentro de valor            |
-| q8            | `digit`                     | q8             | Dígitos dentro de valor           |
-| q8            | `;`                         | q5             | Fin de asignación                 |
-| q0            | `if`                        | q9             | Inicio de condición               |
-| q0            | `while`                     | q9             | Inicio de bucle                   |
-| q0            | `print`                     | q9             | Inicio de impresión               |
-| q0            | `#`                         | q9             | Inicio de comentario              |
-| q9            | `(`                         | q10            | Inicio de condición               |
-| q10           | `letter`                    | q10            | Variables en condición            |
-| q10           | `digit`                     | q10            | Constantes en condición           |
-| q10           | `==` `!=` `<` `>` `<=` `>=` | q10            | Operadores relacionales           |
-| q10           | `)`                         | q5             | Fin de condición                  |
-| q9            | `letter`                    | q9             | Comentario: letras                |
-| q9            | `digit`                     | q9             | Comentario: dígitos               |
-| q9            | `space`                     | q9             | Comentario: espacio               |
-| q9            | `newline`                   | q5             | Fin de comentario                 |
-| q8            | `+ - * /`                   | q8             | Operadores aritméticos            |
+   Cambia `base.txt` por el nombre de tu archivo si es necesario.
 
-## Tokens Soportados
+4. El programa imprimirá una lista de tokens reconocidos, por ejemplo:
 
-El analizador reconoce los siguientes tipos de tokens:
+   ```
+   Analizando archivo: 'base.txt'
 
-- Palabras clave: `var`, `int`, `string`, `bool`, `if`, `while`, `print`, `true`, `false`
-- Identificadores: Nombres de variables
-- Números: Valores enteros
-- Strings: Texto entre comillas dobles
-- Operadores: `+`, `-`, `*`, `/`
-- Comparadores: `==`, `!=`, `<=`, `>=`, `<`, `>`
-- Símbolos especiales: `=`, `;`, `:`, `(`, `)`, `{`, `}`
-- Comentarios: Líneas que comienzan con `#`
+   [OK] PALABRA_CLAVE      --> 'main'
+   [OK] LLAVE_ABRE         --> '{'
+   [OK] PALABRA_CLAVE      --> 'number'
+   [OK] IDENTIFICADOR      --> 'contador'
+   ...
+   [ERROR] Símbolo inesperado: '@'
+   ```
 
-## Uso
+## Espacio para imagen
 
-1. Para analizar código correcto:
-```bash
-python validador_todo_correcto.py
-```
 
-2. Para probar casos de código incorrecto:
-```bash
-python validador_no_correcto.py
-```
 
-3. Para usar el validador final (versión mejorada):
-```bash
-cd FINAL
-python validador.py
-```
+## Tabla de transición (basada en automata_final.jff)
 
-## Ejemplo de Código Válido
+| Estado Origen | Entrada      | Estado Destino | Descripción                       |
+|-------------- |------------- |---------------|-----------------------------------|
+| q0            | L            | q1            | Letra inicial de identificador    |
+| q1            | L/N          | q1            | Letras o números en identificador |
+| q0            | main symbols | q2/q3/q4/q5...| Agrupadores y operadores          |
+| q0            | //           | q16           | Comentario de línea               |
+| q16           | #n           | q16           | Comentario hasta salto de línea   |
+| q0            | >, <, =, !   | q7            | Operadores relacionales           |
+| q7            | =            | q8            | Operador doble (>=, <=, ==, !=)   |
+| q0            | (            | q2            | Paréntesis de apertura            |
+| q0            | )            | q2            | Paréntesis de cierre              |
+| q0            | {            | q2            | Llave de apertura                 |
+| q0            | }            | q2            | Llave de cierre                   |
+| q0            | +, -         | q10           | Operadores aritméticos            |
+| q0            | &            | q12           | Operador lógico AND               |
+| q12           | &            | q13           | Operador lógico AND (&&)          |
+| q0            | |            | q14           | Operador lógico OR                |
+| q14           | |            | q15           | Operador lógico OR (||)           |
+| q0            | números      | q3/q5         | Números enteros o flotantes       |
+| q3            | .            | q6            | Punto decimal para flotante       |
+| q6            | números      | q5            | Parte decimal de flotante         |
+| q0            | "            | q4            | Inicio de literal de cadena       |
+| q4            | cualquier    | q4            | Caracteres dentro de la cadena    |
+| q4            | "            | q5            | Fin de literal de cadena          |
+| ...           | ...          | ...           | ...                               |
 
-```python
-# Declaración de variables
-var x: int;
-var texto: string;
-var activo: bool;
-
-# Asignaciones
-x = 42;
-texto = "Hola mundo";
-activo = true;
-
-# Estructuras de control
-if (x > 10) {
-    print(true);
-}
-```
-
-## Ejemplos de Código Incorrecto
-
-El archivo `FINAL/codigo_mixto.txt` contiene ejemplos de código correcto e incorrecto:
-
-```python
-# Código correcto
-var edad: int;              # ✅ Válido: declaración correcta
-var nombre: string;         # ✅ Válido: declaración correcta
-edad = 25;                  # ✅ Válido: asignación correcta
-
-# Código incorrecto
-var 123edad: int;           # ❌ Inválido: identificador comienza con número
-var nombre@: string;        # ❌ Inválido: carácter no válido
-edad = "25";                # ❌ Inválido: tipo incorrecto
-```
-
-## Manejo de Errores
-
-El analizador detecta y reporta los siguientes tipos de errores:
-- Caracteres no válidos
-- Identificadores mal formados
-- Strings sin cerrar
-- Operadores no válidos
-- Comentarios mal formados
-
-## Requisitos
-
-- Python
-- No se requieren dependencias externas
-
----
+> Nota: Esta tabla es un resumen interpretativo de las transiciones principales del autómata en automata_final.jff, adaptada a los tokens y símbolos que reconoce el analizador léxico.

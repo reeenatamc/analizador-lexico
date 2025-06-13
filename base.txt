@@ -1,18 +1,25 @@
-# njbpc rup
-# ajhik zmtbot
-var ubkmqoyf: bool;
-var thf: string;
-var ohp: int;
-ubkmqoyf = true;
-thf = fdi;
-ohp = 27;
-if (33 <= "trhwx") {
-    print(false);
-    myirccie = 49;
-    # vsd dlwfeb ysyey
-}
-while (26 > 47) {
-    print(true);
-    iirj = false;
-    # ygmlczbc tuept wngnrva ykw
+// Esto es un comentario de línea
+
+main {
+    number contador = 0;
+    string saludo = "Hola, mundo!";
+    Boolean bandera = True;
+
+    for (contador = 0; contador < 10; contador++) {
+        if (bandera and contador != 5) {
+            echo saludo;
+        } else {
+            echo "Contador es 5";
+        }
+    }
+
+    // Prueba operadores
+    contador--;
+    bandera = !bandera;
+
+    input resultado;
+
+    while (resultado < 100.5 or resultado >= 50.25) {
+        resultado = resultado + 1;
+    }
 }
