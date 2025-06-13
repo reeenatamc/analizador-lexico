@@ -69,8 +69,8 @@ Este proyecto corresponde al trabajo bimestral de la asignatura "Teoría de Aut�
 | q0            | +, -         | q10           | Operadores aritméticos            |
 | q0            | &            | q12           | Operador lógico AND               |
 | q12           | &            | q13           | Operador lógico AND (&&)          |
-| q0            | "|"            | q14           | Operador lógico OR                |
-| q14           | "|"            | q15           | Operador lógico OR (||)           |
+| q0            | linea vertical| q14           | Operador lógico OR                |
+| q14           | linea vertical| q15           | Operador lógico OR (||)           |
 | q0            | números      | q3/q5         | Números enteros o flotantes       |
 | q3            | .            | q6            | Punto decimal para flotante       |
 | q6            | números      | q5            | Parte decimal de flotante         |
